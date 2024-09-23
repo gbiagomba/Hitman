@@ -1,0 +1,50 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build on all platforms
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+
+      - name: Build the project
+        run: cargo build --release
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: hitman-${{ matrix.os }}
+          path: target/release/hitman
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: target/release/hitman
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
