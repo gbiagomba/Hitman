@@ -2,6 +2,7 @@
 ![alt tag](img/Firefly%20Create%20a%20logo%20inspired%20by%20the%20Hitman%20video%20game%20series.%20The%20logo%20should%20capture%20the%20sleek,%20s%20(8).jpg)
 
 # Hitman
+![GitHub](https://img.shields.io/github/license/Achiefs/fim) [![Tip Me via PayPal](https://img.shields.io/badge/PayPal-tip_me-green?logo=paypal)](paypal.me/gbiagomba)
 
 `hitman` is a command-line tool written in Rust that extracts IPv4, IPv6 addresses, and fully qualified domain names (FQDNs) from a text file. It uses the `clap` crate for command-line argument parsing and the `ripgrep` crate for efficient regular expression searching.
 
